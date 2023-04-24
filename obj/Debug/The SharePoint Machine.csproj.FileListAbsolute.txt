@@ -1,0 +1,23 @@
+C:\Users\jsimi\source\repos\The SharePoint Machine\bin\Debug\The SharePoint Machine.exe.config
+C:\Users\jsimi\source\repos\The SharePoint Machine\bin\Debug\The SharePoint Machine.exe
+C:\Users\jsimi\source\repos\The SharePoint Machine\bin\Debug\The SharePoint Machine.pdb
+C:\Users\jsimi\source\repos\The SharePoint Machine\bin\Debug\Microsoft.Office.Client.Policy.dll
+C:\Users\jsimi\source\repos\The SharePoint Machine\bin\Debug\Microsoft.Office.Client.TranslationServices.dll
+C:\Users\jsimi\source\repos\The SharePoint Machine\bin\Debug\Microsoft.Office.SharePoint.Tools.dll
+C:\Users\jsimi\source\repos\The SharePoint Machine\bin\Debug\Microsoft.Online.SharePoint.Client.Tenant.dll
+C:\Users\jsimi\source\repos\The SharePoint Machine\bin\Debug\Microsoft.ProjectServer.Client.dll
+C:\Users\jsimi\source\repos\The SharePoint Machine\bin\Debug\Microsoft.SharePoint.Client.dll
+C:\Users\jsimi\source\repos\The SharePoint Machine\bin\Debug\Microsoft.SharePoint.Client.DocumentManagement.dll
+C:\Users\jsimi\source\repos\The SharePoint Machine\bin\Debug\Microsoft.SharePoint.Client.Publishing.dll
+C:\Users\jsimi\source\repos\The SharePoint Machine\bin\Debug\Microsoft.SharePoint.Client.Runtime.dll
+C:\Users\jsimi\source\repos\The SharePoint Machine\bin\Debug\Microsoft.SharePoint.Client.Search.Applications.dll
+C:\Users\jsimi\source\repos\The SharePoint Machine\bin\Debug\Microsoft.SharePoint.Client.Search.dll
+C:\Users\jsimi\source\repos\The SharePoint Machine\bin\Debug\Microsoft.SharePoint.Client.Taxonomy.dll
+C:\Users\jsimi\source\repos\The SharePoint Machine\bin\Debug\Microsoft.SharePoint.Client.UserProfiles.dll
+C:\Users\jsimi\source\repos\The SharePoint Machine\bin\Debug\Microsoft.SharePoint.Client.WorkflowServices.dll
+C:\Users\jsimi\source\repos\The SharePoint Machine\obj\Debug\The SharePoint Machine.csproj.AssemblyReference.cache
+C:\Users\jsimi\source\repos\The SharePoint Machine\obj\Debug\The SharePoint Machine.csproj.SuggestedBindingRedirects.cache
+C:\Users\jsimi\source\repos\The SharePoint Machine\obj\Debug\The SharePoint Machine.csproj.CoreCompileInputs.cache
+C:\Users\jsimi\source\repos\The SharePoint Machine\obj\Debug\The SharePoint Machine.csproj.CopyComplete
+C:\Users\jsimi\source\repos\The SharePoint Machine\obj\Debug\The SharePoint Machine.exe
+C:\Users\jsimi\source\repos\The SharePoint Machine\obj\Debug\The SharePoint Machine.pdb
