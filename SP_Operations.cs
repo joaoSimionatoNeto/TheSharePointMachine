@@ -8,6 +8,8 @@ using System.Security;
 using System.IO;
 using Microsoft.SharePoint.Client.Search.Query;
 using Microsoft.SharePoint.News.DataModel;
+using System.Xml;
+using System.Xml.Linq;
 
 namespace The_SharePoint_Machine
 {
@@ -578,10 +580,43 @@ namespace The_SharePoint_Machine
             }
         }
 
-        public void CreatList(string name, string internalName, string description, string xml)
+        public void CreateFields(string XmlPath, string ListName)
         {
             try
             {
+                List<string> fieldsXml = new List<string>();
+                Web web = context.Web;
+                List list = web.Lists.GetByTitle(ListName);
+                using (XmlReader reader = XmlReader.Create(XmlPath))
+                {
+                    while (reader.Read())
+                    {
+                        if (reader.NodeType == XmlNodeType.Element && reader.Name == "Field")
+                        {
+                            fieldsXml.Add(reader.ReadOuterXml());
+                        }
+                    }
+                }
+                foreach (string fieldXml in fieldsXml)
+                {
+
+                    list.Fields.AddFieldAsXml(fieldXml, true, AddFieldOptions.DefaultValue);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Erro:" + e.Message);
+                Console.ResetColor();
+            }
+
+
+        }
+        public void CreateList(string name, string internalName, string description, string XmlPath)
+        {
+            try
+            {
+
                 Web web = context.Web;
                 ListCreationInformation createList = new ListCreationInformation();
                 createList.Title = name;
@@ -589,10 +624,11 @@ namespace The_SharePoint_Machine
                 createList.Description = description;
                 createList.Url = internalName;
                 List list = web.Lists.Add(createList);
-                
-                list.Fields.AddFieldAsXml(xml, true, AddFieldOptions.DefaultValue);
-
                 context.ExecuteQuery();
+                if (XmlPath != null)
+                {
+                    this.CreateFields(XmlPath, internalName);
+                }
             }
             catch (Exception e)
             {

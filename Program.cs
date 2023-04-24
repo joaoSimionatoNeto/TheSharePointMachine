@@ -119,6 +119,7 @@ namespace The_SharePoint_Machine
                             switch (program)
                             {
                                 case 0:
+                                    Console.Clear();
                                     Console.WriteLine("*****************************************************");
                                     Console.WriteLine("*              The SharePoint Machine               *");
                                     Console.WriteLine("*****************************************************");
@@ -176,7 +177,6 @@ namespace The_SharePoint_Machine
                                     Console.WriteLine("27 - Enumerar Permissões ");
                                     Console.WriteLine("28 - Todas as Permissões");
                                     permission = Console.ReadLine();
-                                    permission = permission.Replace(",", "");
                                     string[] permissions = permission.Split(delimiterChars);
                                     operations.CreateRole(Title, Description, permissions);
                                     program = 0;
@@ -286,7 +286,6 @@ namespace The_SharePoint_Machine
                                     string[] RemovedRoles = RemoveRole.Split(delimiterChars);
                                     Console.WriteLine("Digite o nome do grupo de permissão a ser adicionado (caso não queira remover nenhum precione enter):");
                                     AddRole = Console.ReadLine();
-                                    AddRole = AddRole.Replace(",", "");
                                     string[] AddedRole = AddRole.Split(delimiterChars);
                                     operations.EditGroup(Title, NewTitle, Description, AddedUsers, RemovedUsers, RemovedRoles, AddedRole);
                                     program = 0;
@@ -326,31 +325,17 @@ namespace The_SharePoint_Machine
                         Description = Console.ReadLine();
                         Console.Write("Insira o caminho do arquivo Xml contendo os campos a serem criados na lista: ");
                         XmlPath =  Console.ReadLine();
-
-                        XmlDocument doc = new XmlDocument();
-                        doc.Load(XmlPath);
-                        string xml = doc.InnerXml;
-                        operations.CreatList(Title, InternalName, Description, xml);
+                        operations.CreateList(Title, InternalName, Description, XmlPath);
                         break;
                     case 5:
                         Console.Write("Digite o InternalName da lista a ser editada: ");
                         InternalName = Console.ReadLine();
                         Console.Write("Digite o caminho do arquivo Xml contento os campos a serem adicionados (Caso não queira adicionar campos, precione enter): ");
                         XmlPath = Console.ReadLine();
-                        if (XmlPath != null)
-                        {
-                            XmlDocument docAdd = new XmlDocument();
-                            docAdd.Load(XmlPath);
-                            xmlAdd = docAdd.ToString();
-                        }
-                        else
-                        {
-                            xmlAdd = null;
-                        }
                         Console.WriteLine("Digite os internal names separados por vírgulas, sem espaços, dos campos a serem removidos (Caso não queira adicionar campos, precione enter): ");
                         Fields = Console.ReadLine();
                         string[] field = Fields.Split(delimiterChars);
-                        operations.EditList(InternalName, xmlAdd, field);
+                        operations.EditList(InternalName, XmlPath, field);
                         program = 0;
                         break;
                     case 6:
