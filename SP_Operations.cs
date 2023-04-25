@@ -602,6 +602,7 @@ namespace The_SharePoint_Machine
 
                     list.Fields.AddFieldAsXml(fieldXml, true, AddFieldOptions.DefaultValue);
                 }
+                context.ExecuteQuery();
             }
             catch (Exception e)
             {
@@ -616,7 +617,6 @@ namespace The_SharePoint_Machine
         {
             try
             {
-
                 Web web = context.Web;
                 ListCreationInformation createList = new ListCreationInformation();
                 createList.Title = name;
@@ -625,10 +625,7 @@ namespace The_SharePoint_Machine
                 createList.Url = internalName;
                 List list = web.Lists.Add(createList);
                 context.ExecuteQuery();
-                if (XmlPath != null)
-                {
-                    this.CreateFields(XmlPath, internalName);
-                }
+
             }
             catch (Exception e)
             {
@@ -636,6 +633,7 @@ namespace The_SharePoint_Machine
                 Console.WriteLine($"Ocorreu um erro: {e}");
                 Console.ResetColor();
             }
+            this.CreateFields(XmlPath, internalName);
         }
 
         public void EditList(string internalName, string xml, string[] fields)

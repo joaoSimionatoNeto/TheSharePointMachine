@@ -120,6 +120,7 @@ namespace The_SharePoint_Machine
                             {
                                 case 0:
                                     Console.Clear();
+                                    Console.Clear();
                                     Console.WriteLine("*****************************************************");
                                     Console.WriteLine("*              The SharePoint Machine               *");
                                     Console.WriteLine("*****************************************************");
@@ -325,17 +326,20 @@ namespace The_SharePoint_Machine
                         Description = Console.ReadLine();
                         Console.Write("Insira o caminho do arquivo Xml contendo os campos a serem criados na lista: ");
                         XmlPath =  Console.ReadLine();
+                        XmlPath = XmlPath.Replace(@"\", @"\\");
                         operations.CreateList(Title, InternalName, Description, XmlPath);
+                        program = 0;
                         break;
                     case 5:
                         Console.Write("Digite o InternalName da lista a ser editada: ");
                         InternalName = Console.ReadLine();
                         Console.Write("Digite o caminho do arquivo Xml contento os campos a serem adicionados (Caso não queira adicionar campos, precione enter): ");
                         XmlPath = Console.ReadLine();
+                        XmlPath = XmlPath.Replace(@"\", @"\\");
                         Console.WriteLine("Digite os internal names separados por vírgulas, sem espaços, dos campos a serem removidos (Caso não queira adicionar campos, precione enter): ");
                         Fields = Console.ReadLine();
                         string[] field = Fields.Split(delimiterChars);
-                        operations.EditList(InternalName, XmlPath, field);
+                        operations.EditList(InternalName, XmlPath, field); 
                         program = 0;
                         break;
                     case 6:
