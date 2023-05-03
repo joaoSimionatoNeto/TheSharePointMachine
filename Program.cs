@@ -104,13 +104,10 @@ namespace The_SharePoint_Machine
                         if(Console.ReadLine().ToUpper() == "S")
                         {
                             operations.DeleteSite();
-                            Console.Clear();
+                            
                         }
-                        else
-                        {
-                            program = 0;
-                            Console.Clear();
-                        }
+                        Console.Clear();
+                        program = 0;
                         break;
                     case 3:
                         program = 0;
@@ -352,11 +349,8 @@ namespace The_SharePoint_Machine
                             operations.DeleteList(InternalName);
                             Console.Clear();
                         }
-                        else
-                        {
-                            program = 0;
-                            Console.Clear();
-                        }
+                        program = 0;
+                        Console.Clear();
                         break;
                     case 7:
                         Console.WriteLine("Função em desenvolvimento, retornando ao menu........");
@@ -373,7 +367,10 @@ namespace The_SharePoint_Machine
                         file = Console.ReadLine();
                         Console.WriteLine("Insira o nome dos campos a serem exportados separados por vírgula, sem espaço: ");
                         Fields = Console.ReadLine();
-                        operations.ExportList(InternalName, file, Fields);
+                        string[] listFields = Fields.Split(delimiterChars);
+                        operations.ExportList(InternalName, file, listFields);
+                        program = 0;
+                        Console.Clear();
                         break;
 
                     default:

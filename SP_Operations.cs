@@ -10,6 +10,7 @@ using Microsoft.SharePoint.Client.Search.Query;
 using Microsoft.SharePoint.News.DataModel;
 using System.Xml;
 using System.Xml.Linq;
+using System.CodeDom;
 
 namespace The_SharePoint_Machine
 {
@@ -636,15 +637,15 @@ namespace The_SharePoint_Machine
             this.CreateFields(XmlPath, internalName);
         }
 
-        public void EditList(string internalName, string xml, string[] fields)
+        public void EditList(string internalName, string XmlPath, string[] fields)
         {
             try
             {
                 Web web = context.Web;
                 List list = web.Lists.GetByTitle(internalName);
-                if(xml != null)
+                if(XmlPath != null)
                 {
-                    list.Fields.AddFieldAsXml(xml, true, AddFieldOptions.DefaultValue);
+                    this.CreateFields(XmlPath, internalName);
                 }
                 if(fields != null)
                 {
@@ -666,35 +667,56 @@ namespace The_SharePoint_Machine
 
         public void DeleteList(string InternalName)
         {
-            Web web = context.Web;
-            List list = web.Lists.GetByTitle(InternalName);
-            list.DeleteObject();
-            context.ExecuteQuery();
+            try
+            {
+                Web web = context.Web;
+                List list = web.Lists.GetByTitle(InternalName);
+                list.DeleteObject();
+                context.ExecuteQuery();
+            }
+            catch (Exception e)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"Erro: {e}");
+                Console.ResetColor();
+            }
         }
 
-        public void ExportList(string internalName, string fileName, string fields)
+        public void ExportList(string internalName, string fileName, string[] fields)
         {
             List list = context.Web.Lists.GetByTitle(internalName);
             CamlQuery query = CamlQuery.CreateAllItemsQuery();
-            ListItemCollection items = list.GetItems(query);
-
-            context.Load(items);
+            ListItemCollection listItems = list.GetItems(query);
+            context.Load(list);
+            context.Load(listItems);
             context.ExecuteQuery();
-
             StringBuilder csv = new StringBuilder();
-            csv.Append(string.Join(",", fields.Replace(";", ".,") + ";"));
+            foreach (ListItem listItem in listItems)
+            {
+                foreach (string field in fields)
+                {
+                    string finalField = listItem.FieldValues[field].ToString();
+                    csv.Append(string.Join(";", finalField.Replace(";", "[.,]") + ";"));
+
+                }
+            }
+            System.IO.File.WriteAllText(fileName, csv.ToString());
+            /*
+            StringBuilder csv = new StringBuilder();
+            csv.Append(string.Join(";;", fields.Replace(";", ".,") + ";"));
             foreach (ListItem item in items)
             {
-                List<string> row = new List<string>();
+                //List<string> row = new List<string>();
                 
                 foreach (var field in fields)
                 {
                     Console.WriteLine(field);
+                    Console.WriteLine();
                 }
                 
-            }
+            }*/
 
-            
+
         }
 
 
