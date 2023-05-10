@@ -684,40 +684,62 @@ namespace The_SharePoint_Machine
 
         public void ExportList(string internalName, string fileName, string[] fields)
         {
-            List list = context.Web.Lists.GetByTitle(internalName);
-            CamlQuery query = CamlQuery.CreateAllItemsQuery();
-            ListItemCollection listItems = list.GetItems(query);
-            context.Load(list);
-            context.Load(listItems);
-            context.ExecuteQuery();
-            StringBuilder csv = new StringBuilder();
-            foreach (ListItem listItem in listItems)
-            {
-                foreach (string field in fields)
+              try { 
+                List list = context.Web.Lists.GetByTitle(internalName);
+                CamlQuery query = CamlQuery.CreateAllItemsQuery();
+                ListItemCollection listItems = list.GetItems(query);
+                context.Load(list);
+                context.Load(listItems);
+                context.ExecuteQuery();
+                bool append = false;
+                fileName = fileName + ".csv";
+                string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), fileName);
+                StringBuilder csv = new StringBuilder();
+                string finalField = "";
+                if (!System.IO.File.Exists(filePath))
                 {
-                    string finalField = listItem.FieldValues[field].ToString();
-                    csv.Append(string.Join(";", finalField.Replace(";", "[.,]") + ";"));
+                  append = false;
 
                 }
-            }
-            System.IO.File.WriteAllText(fileName, csv.ToString());
-            /*
-            StringBuilder csv = new StringBuilder();
-            csv.Append(string.Join(";;", fields.Replace(";", ".,") + ";"));
-            foreach (ListItem item in items)
-            {
-                //List<string> row = new List<string>();
-                
-                foreach (var field in fields)
+                else
                 {
-                    Console.WriteLine(field);
-                    Console.WriteLine();
+                  append = true;
                 }
-                
-            }*/
+                StreamWriter writer = new StreamWriter(filePath, append);
+
+                // Escreva o cabeçalho do arquivo CSV, separando os nomes dos campos por ";"
+                string header = string.Join(";", fields);
+                writer.WriteLine(header);
+                foreach (ListItem listItem in listItems)
+                {
+                  //string[] values = fields.Select(f => listItem[f]?.ToString() ?? "").ToArray();
+                  List<string> values = new List<string>();
+                  foreach (string field in fields)
+                  {
+                    if (listItem.FieldValues[field] != null)
+                    {
+                      finalField = listItem.FieldValues[field].ToString().Replace("\r", "").Replace("\n", "").Replace(";", "[.,]");
+                      values.Add(finalField);
+                    }
+                    else
+                    {
+                      values.Add("");
+                    }
 
 
-        }
+                  }
+                  string line = string.Join(";", values);
+                  writer.WriteLine(line);
+                }
+                writer.Close();
+
+
+              }catch(Exception e)
+              {
+                Console.Write(e);
+              }
+
+}
 
 
 

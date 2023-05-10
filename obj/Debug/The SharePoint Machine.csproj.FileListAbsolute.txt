@@ -21,3 +21,11 @@ C:\Users\jsimi\source\repos\The SharePoint Machine\obj\Debug\The SharePoint Mach
 C:\Users\jsimi\source\repos\The SharePoint Machine\obj\Debug\The SharePoint Machine.csproj.CopyComplete
 C:\Users\jsimi\source\repos\The SharePoint Machine\obj\Debug\The SharePoint Machine.exe
 C:\Users\jsimi\source\repos\The SharePoint Machine\obj\Debug\The SharePoint Machine.pdb
+C:\Projetos\TheSharePointMachine\bin\Debug\The SharePoint Machine.exe.config
+C:\Projetos\TheSharePointMachine\bin\Debug\The SharePoint Machine.exe
+C:\Projetos\TheSharePointMachine\bin\Debug\The SharePoint Machine.pdb
+C:\Projetos\TheSharePointMachine\obj\Debug\The SharePoint Machine.csprojAssemblyReference.cache
+C:\Projetos\TheSharePointMachine\obj\Debug\The SharePoint Machine.csproj.CoreCompileInputs.cache
+C:\Projetos\TheSharePointMachine\obj\Debug\The SharePoint Machine.csproj.CopyComplete
+C:\Projetos\TheSharePointMachine\obj\Debug\The SharePoint Machine.exe
+C:\Projetos\TheSharePointMachine\obj\Debug\The SharePoint Machine.pdb
