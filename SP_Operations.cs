@@ -614,6 +614,35 @@ namespace The_SharePoint_Machine
 
 
         }
+
+        public string[] GetFieldsTitles(string listInteralName)
+        {
+      Web web = context.Web;
+      List list = web.Lists.GetByTitle(listInteralName);
+      context.Load(list);
+      context.ExecuteQuery();
+
+      FieldCollection field = list.Fields;
+        }
+        public void CreateItem(string listInternalName, string fieldInternalName, Dictionary<string, string> data)
+        {
+          try
+          {
+            Web web = context.Web;
+            List list = web.Lists.GetByTitle(listInternalName);
+            CamlQuery query = CamlQuery.CreateAllItemsQuery();
+            ListItemCollection listItems = list.GetItems(query);
+            context.Load(list);
+            context.Load(listItems);
+            
+
+
+      }
+      catch(Exception e)
+          {
+            Console.WriteLine(e);
+          }
+        }
         public void CreateList(string name, string internalName, string description, string XmlPath)
         {
             try
@@ -709,7 +738,6 @@ namespace The_SharePoint_Machine
 
                 // Escreva o cabeçalho do arquivo CSV, separando os nomes dos campos por ";"
                 string header = string.Join(";", fields);
-                writer.WriteLine(header);
                 foreach (ListItem listItem in listItems)
                 {
                   //string[] values = fields.Select(f => listItem[f]?.ToString() ?? "").ToArray();
@@ -740,6 +768,7 @@ namespace The_SharePoint_Machine
               }
 
 }
+        
 
 
 
