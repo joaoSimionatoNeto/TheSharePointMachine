@@ -714,6 +714,7 @@ namespace The_SharePoint_Machine
         public void ExportList(string internalName, string fileName, string[] fields)
         {
               try { 
+              #adicionar paginação 
                 List list = context.Web.Lists.GetByTitle(internalName);
                 CamlQuery query = CamlQuery.CreateAllItemsQuery();
                 ListItemCollection listItems = list.GetItems(query);
